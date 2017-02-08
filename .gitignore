@@ -1,0 +1,6 @@
+node_modules/
+.env
+.sass-cache
+storage/logs/*
+client/public/build
+npm-debug.log
