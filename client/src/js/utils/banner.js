@@ -1,8 +1,11 @@
+import _ from 'lodash';
+
 module.exports = {
   appearances(dataset) {
     var games = [];
+
     dataset.map(d => {
-      if (games.findIndex((element) => element === d.gameDate) === -1) {
+      if (_.findIndex(games, function(g) {return g === d.gameDate}) === -1) {
         games.push(d.gameDate);
       }
     });
@@ -13,4 +16,4 @@ module.exports = {
   avgPitchCount(appearances, pitches) {
     return Math.round(pitches / appearances);
   }
-}
+};
