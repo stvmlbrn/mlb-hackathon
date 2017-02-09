@@ -5,7 +5,6 @@ import Axios from 'axios';
 import HeadToHead from './HeadToHead';
 import PitchSelection from './PitchSelection';
 import PanelNoControls from '../components/panels/PanelNoControls';
-import SelectSeasonForm from '../components/SelectSeasonForm';
 import PlayerBanner from '../components/PlayerBanner';
 
 import banner from '../utils/banner';
@@ -22,6 +21,7 @@ export default class extends Component {
       season: 2016,
       appearances: 0,
       avgPitchCount: 0,
+      pitchTotals: [],
       bannerData: {
         appearances: 0,
         totalPitches: 0,
@@ -49,8 +49,21 @@ export default class extends Component {
           loading: false,
           dataset: result.data,
           name: result.data.length ? result.data[0].pitcher : ''
-        }, this.calculateBannerData);
+        }, this.loadInitialStats);
       });
+  }
+
+  loadInitialStats = () => {
+    this.calculateBannerData();
+    this.calculatePitchSelectionData();
+    this.calculatePitchTotals();
+  }
+
+  calculatePitchTotals = () => {
+    var {dataset} = this.state;
+
+    totals = banner.pitchSelectionTotals(dataset);
+    this.setState({pitchTotals: totals})
   }
 
   calculateBannerData = () => {
@@ -83,17 +96,18 @@ export default class extends Component {
   }
 
   render() {
-    var {name, bannerData, pitchSelectionData, pitcherId, season} = this.state;
+    var {name, bannerData, pitchSelectionData, pitcherId, season, loading, dataset} = this.state;
+    var dataFound = false;
 
-    /* if (!loading && !dataset.length) {
-      return (
-        <div>No data found. Please select another season.</div>
-      )
-    } else { */
-      return (
-        <div>
-          <PlayerBanner data={bannerData} pitcherId={pitcherId} name={name} />
-          <SelectSeasonForm onChange={this.selectSeason} season={season} />
+    if (!loading && dataset.length) {
+      dataFound = true;
+    }
+
+    return (
+      <div>
+        <PlayerBanner data={bannerData} pitcherId={pitcherId} name={name}
+          selectSeason={this.selectSeason} season={season} />
+        {dataFound &&
           <PanelNoControls>
             <Tabs id="controlled-tab-example">
               <Tab eventKey={1} title="Pitch Selection">
@@ -110,8 +124,14 @@ export default class extends Component {
               </Tab>
             </Tabs>
           </PanelNoControls>
-        </div>
-      );
-    //}
+        }
+
+        {!dataFound && !loading &&
+          <PanelNoControls>
+            No data found for the selected season...
+          </PanelNoControls>
+        }
+      </div>
+    );
   }
 };
