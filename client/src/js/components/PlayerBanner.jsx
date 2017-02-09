@@ -3,7 +3,7 @@ import PanelNoControls from './panels/PanelNoControls';
 import Box from './box';
 
 function PlayerBanner(props) {
-  var {data, pitcherId, name} = props;
+  var {data, pitcherId, name, selectSeason, season} = props;
   return (
     <PanelNoControls>
       <div className="row">
@@ -14,6 +14,11 @@ function PlayerBanner(props) {
             </div>
             <div className="media-body">
               <h3>{name}</h3>
+              <select name="season" className="form-control" onChange={selectSeason} value={season} >
+                <option value="2016">Season: 2016</option>
+                <option value="2015">Season: 2015</option>
+                <option value="2014">Season: 2014</option>
+              </select>
             </div>
           </div>
         </div>
