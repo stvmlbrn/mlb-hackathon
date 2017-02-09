@@ -10,7 +10,7 @@ function PlayerBanner(props) {
         <div className="col-md-3">
           <div className="media">
             <div className="media-left">
-              <img src={`http://mlb.mlb.com/mlb/images/players/head_shot/${pitcherId}.jpg`} className="media-object" height="100" />
+              <img src={`http://mlb.mlb.com/mlb/images/players/head_shot/${pitcherId}.jpg`} className="media-object" height="125" />
             </div>
             <div className="media-body">
               <h3>{name}</h3>
