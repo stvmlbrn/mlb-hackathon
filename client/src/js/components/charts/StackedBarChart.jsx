@@ -1,6 +1,8 @@
 import React from 'react';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 
+import _ from 'lodash';
+
 function StackedBarChart(props) {
   var {data} = props;
   var dataPoints = [];
@@ -9,7 +11,7 @@ function StackedBarChart(props) {
 
   data.map(d => {
     Object.keys(d).map(key => {
-      if ((key !== 'name') && (dataPoints.findIndex((element) => element === key) === -1)) {
+      if ((key !== 'name') && (_.findIndex(dataPoints, (element) => element === key) === -1)) {
         dataPoints.push(key);
       }
     });
@@ -28,7 +30,7 @@ function StackedBarChart(props) {
         {dataPoints.map(d => {
           colorIndex++;
           return (
-            <Bar key={d} dataKey={d} stackId="a" fill={colors[colorIndex]}/>
+            <Bar key={d} dataKey={d} stackId="a" fill={colors[colorIndex]} />
           );
         })}
       </BarChart>

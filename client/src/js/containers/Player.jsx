@@ -4,8 +4,10 @@ import Axios from 'axios';
 
 import HeadToHead from './HeadToHead';
 import PitchSelection from './PitchSelection';
+
 import PanelNoControls from '../components/panels/PanelNoControls';
 import PlayerBanner from '../components/PlayerBanner';
+import SituationAnalysis from '../components/SituationAnalysis';
 
 import banner from '../utils/banner';
 import selection from '../utils/selection';
@@ -96,7 +98,7 @@ export default class extends Component {
   }
 
   render() {
-    var {name, bannerData, pitchSelectionData, pitcherId, season, loading, dataset} = this.state;
+    var {name, bannerData, pitchSelectionData, pitcherId, season, loading, dataset, pitchSelectionData} = this.state;
     var dataFound = false;
 
     if (!loading && dataset.length) {
@@ -117,7 +119,7 @@ export default class extends Component {
 
               </Tab>
               <Tab eventKey={3} title="Situational Analysis">
-
+                <SituationAnalysis dataset={dataset} pitchSelectionData={pitchSelectionData.overall} />
               </Tab>
               <Tab eventKey={4} title="Head-To-Head">
                 <HeadToHead/>
