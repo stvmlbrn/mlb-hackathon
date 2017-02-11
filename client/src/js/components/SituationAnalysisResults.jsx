@@ -47,8 +47,8 @@ function SituationAnalysisResults(props) {
           <tfoot>
             <tr>
               <td colSpan="7">
-                <TrendArrow trend="up"/> More likely to be thrown in the given situation.<br/>
-                <TrendArrow trend="down"/> Less likely to be thrown in the given situation.
+                <TrendArrow trend="up"/> More likely to be thrown in the given situation compared to pitcher's overall average.<br/>
+                <TrendArrow trend="down"/> Less likely to be thrown in the given situation compared to pitcher's overall average.
               </td>
             </tr>
           </tfoot>
