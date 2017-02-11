@@ -27,16 +27,26 @@ function SituationForm(props) {
         </div>
       </div>
       <div className="form-group">
+        <label htmlFor="" className="col-sm-3 control-label">Outs</label>
+        <div className="col-sm-9">
+          <select name="outs" className="form-control" onChange={onChange} value={criteria.outs}>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </div>
+      </div>
+      <div className="form-group">
         <label htmlFor="" className="col-sm-3 control-label">Runners</label>
         <div className="col-sm-9">
-          <label htmlFor="" className="checkbox-inline">
-            <input type="checkbox" name="runner1" onChange={onRunnerChange} checked={criteria.runner1}/> 1st
+          <label htmlFor="runner1" className="checkbox-inline">
+            <input type="checkbox" name="runner1" id="runner1" onChange={onRunnerChange} checked={criteria.runner1}/> 1st
           </label>
-          <label htmlFor="" className="checkbox-inline">
-            <input type="checkbox" name="runner2" onChange={onRunnerChange} checked={criteria.runner2}/> 2nd
+          <label htmlFor="runner2" className="checkbox-inline">
+            <input type="checkbox" name="runner2" id="runner2" onChange={onRunnerChange} checked={criteria.runner2}/> 2nd
           </label>
-          <label htmlFor="" className="checkbox-inline">
-            <input type="checkbox" name="runner3" onChange={onRunnerChange} checked={criteria.runner3}/> 3rd
+          <label htmlFor="runner3" className="checkbox-inline">
+            <input type="checkbox" name="runner3" id="runner3" onChange={onRunnerChange} checked={criteria.runner3}/> 3rd
           </label>
         </div>
       </div>
@@ -44,6 +54,7 @@ function SituationForm(props) {
         <label htmlFor="" className="col-sm-3 control-label">Inning</label>
         <div className="col-sm-9">
           <select name="inning" className="form-control" onChange={onChange} value={criteria.inning}>
+            <option value="all">All</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
