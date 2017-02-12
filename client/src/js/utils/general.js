@@ -42,5 +42,9 @@ module.exports = {
     totals = _.sortBy(totals, (t) => parseInt(t.count, 10)).reverse();
 
     return totals;
+  },
+
+  chartColors() {
+    return ['#B30D27', '#BD690E', '#0D5A77', '#35A20C', '#291983'];
   }
 }
