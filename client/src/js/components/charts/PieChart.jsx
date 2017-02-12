@@ -8,6 +8,7 @@ var colors = general.chartColors();
 function Chart(props) {
   var {data} = props;
 
+  //add a 'fill' object for each pitch type so it appears in the chart as a different color
   data.map((d, index) => {
     d.fill = colors[index];
   });

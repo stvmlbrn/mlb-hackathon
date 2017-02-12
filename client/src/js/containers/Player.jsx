@@ -5,10 +5,9 @@ import Axios from 'axios';
 import HeadToHead from './HeadToHead';
 import PitchSelection from './PitchSelection';
 import SituationAnalysis from './SituationAnalysis';
-
+import PlayerBanner from './PlayerBanner';
 
 import PanelNoControls from '../components/panels/PanelNoControls';
-import PlayerBanner from '../components/PlayerBanner';
 
 import banner from '../utils/banner';
 import selection from '../utils/selection';
@@ -126,7 +125,7 @@ export default class extends Component {
                 <SituationAnalysis dataset={dataset} pitchTotals={pitchTotals} />
               </Tab>
               <Tab eventKey={4} title="Head-To-Head">
-                <HeadToHead/>
+                <HeadToHead dataset={dataset} pitcherId={pitcherId}/>
               </Tab>
             </Tabs>
           </PanelNoControls>

@@ -1,10 +1,12 @@
 import React from 'react';
 
 function Box(props) {
-  var {number, title} = props;
+  var {number, title, icon} = props;
   return (
     <div className="metric">
-      <span className="icon"></span>
+      {icon &&
+        <span className="icon"><i className={icon}></i></span>
+      }
       <p>
         <span className="number">{number}</span>
         <span className="title">{title}</span>
