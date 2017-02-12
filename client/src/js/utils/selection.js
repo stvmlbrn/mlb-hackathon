@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 module.exports = {
   overallPercentage(dataset) {
 
@@ -42,5 +44,25 @@ module.exports = {
     });
 
     return data;
+  },
+
+  overall(dataset) {
+    var overallData = [];
+
+    dataset.map(d => {
+      var index = _.findIndex(overallData, (o) => o.name === d.pitchType);
+      if (index === -1) {
+        overallData.push({name: d.pitchType, count: 1});
+      } else {
+        overallData[index].count++;
+      }
+    });
+
+    overallData.map(o => {
+      o.value = parseFloat(((o.count / dataset.length) * 100).toFixed(2));
+      delete o.count;
+    });
+
+    return overallData;
   }
 };

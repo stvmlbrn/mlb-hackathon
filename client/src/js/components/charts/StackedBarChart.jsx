@@ -3,10 +3,13 @@ import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveC
 
 import _ from 'lodash';
 
+import general from '../../utils/general';
+
+
 function StackedBarChart(props) {
   var {data} = props;
   var dataPoints = [];
-  var colors = ['#B30D27', '#BD690E', '#0D5A77', '#35A20C', '#291983'];
+  var colors = general.chartColors();
   var colorIndex = -1;
 
   data.map(d => {

@@ -32,6 +32,7 @@ export default class extends Component {
         avgPitchCount: 0
       },
       pitchSelectionData: {
+        inningBreakdown: [],
         overall: []
       }
     }
@@ -88,7 +89,8 @@ export default class extends Component {
   calculatePitchSelectionData = () => {
     var {dataset, pitchSelectionData} = this.state;
 
-    pitchSelectionData.overall = selection.inningBreakdown(dataset);
+    pitchSelectionData.inningBreakdown = selection.inningBreakdown(dataset);
+    pitchSelectionData.overall = selection.overall(dataset);
 
     this.setState({pitchSelectionData: pitchSelectionData});
   }
@@ -115,7 +117,7 @@ export default class extends Component {
           <PanelNoControls>
             <Tabs id="controlled-tab-example">
               <Tab eventKey={1} title="Pitch Selection">
-                <PitchSelection data={pitchSelectionData} />
+                <PitchSelection inningBreakdown={pitchSelectionData.inningBreakdown} overall={pitchSelectionData.overall} />
               </Tab>
               <Tab eventKey={2} title="Pitch Effectiveness">
 
