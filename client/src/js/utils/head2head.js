@@ -73,6 +73,10 @@ module.exports = {
 
     avg = (h / ab).toFixed(3);
 
-    return {'bb': bb, 'k': k, 'h': h, 'avg': avg.toString().substring(1)};
+    if (parseFloat(avg) < 1) {
+      avg = avg.toString().substring(1);
+    }
+
+    return {'bb': bb, 'k': k, 'h': h, 'avg': avg};
   }
 };
