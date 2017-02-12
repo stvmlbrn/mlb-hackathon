@@ -22,9 +22,7 @@ function StackedBarChart(props) {
 
   return (
     <ResponsiveContainer width="100%" height={400}>
-      {/* <BarChart width={1000} height={300} data={data}
-            margin={{top: 20, right: 30, left: 20, bottom: 5}}> */}
-      <BarChart width={800} height={300} data={data}>
+      <BarChart width={800} height={300} data={data} margin={{top: 20, right: 30, left: 20, bottom: 5}}>
         <XAxis dataKey="name"/>
         <YAxis type="number" domain={[0, 100]}/>
         <CartesianGrid strokeDasharray="3 3"/>
