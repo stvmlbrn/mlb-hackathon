@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 module.exports = {
+  //find all the unique batters in the dataset and sort by batter name
   getBatters(dataset, pitcherId) {
     var batters = [];
 
@@ -10,7 +11,6 @@ module.exports = {
       }
     });
 
-    //find all the unique batters in the dataset and sort by batter name
     batters = _.sortBy(_.uniqBy(batters, 'batterId'), (b) => b.batter);
     return batters;
   },
@@ -78,5 +78,34 @@ module.exports = {
     }
 
     return {'bb': bb, 'k': k, 'h': h, 'avg': avg};
+  },
+
+  //how the pitch selection against a specific hitter changes
+  //as the game goes on, e.g, pitch selection of the first plate
+  //appearance in a game vs the 3rd or 4th PA in a game.
+  pitchSelectionTrend(dataset) {
+    var trend = [];
+
+    dataset.map(d => {
+      //the 'name' property of obj corresponds to timesFaced. It's called 'name' to make it easier
+      //to work with in the chart
+      let obj = {};
+      let index = _.findIndex(trend, (t) => t.name === `Times faced: ${d.timesFaced}`);
+      if (index === -1) {
+        obj.name = `Times faced: ${d.timesFaced}`;
+        obj[d.pitchType] = 1;
+        trend.push(obj);
+      } else {
+        obj = trend[index];
+        if (obj.hasOwnProperty(d.pitchType)) {
+          obj[d.pitchType]++;
+        } else {
+          obj[d.pitchType] = 1;
+        }
+        trend[index] = obj;
+      }
+    });
+
+    return _.sortBy(trend, (t) => t.name);
   }
 };

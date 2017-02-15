@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 
 import PlayerPhoto from '../components/playerPhoto';
-import Box from '../components/box';
 import BarChart from '../components/charts/BarChart';
+import Head2HeadBanner from '../components/Head2HeadBanner';
+import SituationAnalysisResults from '../components/SituationAnalysisResults';
 
 import head2head from '../utils/head2head';
+import general from '../utils/general';
 
 export default class extends Component {
   constructor(props) {
@@ -14,8 +16,11 @@ export default class extends Component {
       batterId: '',
       matchupData: [],
       paResults: {},
+      totalPitches: 0,
       pa: 0,
-      pppa: 0 //pitches per plate appearance
+      pppa: 0, //pitches per plate appearance
+      pitchSelectionTotals: [],
+      pitchSelectionTrend: [] //how pitch selection against batter changes as game progresses
     };
   }
 
@@ -39,17 +44,23 @@ export default class extends Component {
     var pa = head2head.countPlateAppearances(matchupData);
     var paResults = head2head.paResults(matchupData);
     var pppa = (matchupData.length / pa).toFixed(1);
+    var pitchSelectionTotals = general.pitchSelectionTotals(matchupData);
+    var pitchSelectionTrend = head2head.pitchSelectionTrend(matchupData);
 
     this.setState({
       matchupData: matchupData,
       paResults: paResults,
       pa: pa,
-      pppa: pppa
+      pppa: pppa,
+      totalPitches: matchupData.length,
+      pitchSelectionTotals: pitchSelectionTotals,
+      pitchSelectionTrend: pitchSelectionTrend
     });
   }
 
   render() {
-    var {batters, batterId, matchupData, paResults, pa, pppa} = this.state;
+    var {batters, batterId, matchupData, paResults, pa, pppa, totalPitches, pitchSelectionTotals, pitchSelectionTrend} = this.state;
+    var {pitchTotals} = this.props;
 
     return (
       <div className="row">
@@ -64,26 +75,26 @@ export default class extends Component {
           </select>
           <br/>
           {(batterId !== '') &&
-            <PlayerPhoto playerId={batterId} height="300"/>
+            <PlayerPhoto playerId={batterId} height={300}/>
           }
         </div>
         <div className="col-md-9">
-          <div className="row">
-            <div className="col-md-4"><Box number={matchupData.length} title="Total Pitches"/></div>
-            <div className="col-md-4"><Box number={pa} title="Plate Appearances"/></div>
-            <div className="col-md-4"><Box number={pppa} title="Pitches / PA"/></div>
-          </div>
-          <div className="row">
-            <div className="col-md-3"><Box number={paResults.avg} title="Avg"/></div>
-            <div className="col-md-3"><Box number={paResults.h} title="Hits"/></div>
-            <div className="col-md-3"><Box number={paResults.bb} title="Walks"/></div>
-            <div className="col-md-3"><Box number={paResults.k} title="Strike Outs"/></div>
-          </div>
-          <div className="row">
-            <div className="col-md-12">
-              <BarChart height={300}/>
+          {(pa > 0) &&
+            <div>
+              <Head2HeadBanner pa={pa} pppa={pppa} avg={paResults.avg}
+                h={paResults.h} bb={paResults.bb} k={paResults.k}/>
+
+              <div className="well well-sm">
+                <SituationAnalysisResults totalPitches={totalPitches} pitchTotals={pitchTotals} analysis={pitchSelectionTotals} />
+              </div>
+
+              <BarChart height={400} data={pitchSelectionTrend} />
+              <em>
+              Shows the total number of pitches of each pitch type thrown to the batter for each time faced
+              in a game.
+              </em>
             </div>
-          </div>
+          }
         </div>
       </div>
     );

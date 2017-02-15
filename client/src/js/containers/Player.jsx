@@ -125,7 +125,7 @@ export default class extends Component {
                 <SituationAnalysis dataset={dataset} pitchTotals={pitchTotals} />
               </Tab>
               <Tab eventKey={4} title="Head-To-Head">
-                <HeadToHead dataset={dataset} pitcherId={pitcherId}/>
+                <HeadToHead dataset={dataset} pitcherId={pitcherId} pitchTotals={pitchTotals}/>
               </Tab>
             </Tabs>
           </PanelNoControls>
