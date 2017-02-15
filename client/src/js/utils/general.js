@@ -44,7 +44,8 @@ module.exports = {
     return totals;
   },
 
+  //return a list of colors used in charts.
   chartColors() {
-    return ['#B30D27', '#BD690E', '#0D5A77', '#35A20C', '#291983'];
+    return ['#B30D27', '#BD690E', '#0D5A77', '#35A20C', '#291983', '#b2bd78', '#ff540e', '#fdd75c'];
   }
 }
