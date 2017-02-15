@@ -47,7 +47,7 @@ export default class extends Component {
             <StackedBarChart data={inningBreakdown} />
             <p className="text-center">
               <em>
-              Shows how the usage of each pitch type changes from inning to inning.
+              Shows how the usage of each pitch type (shown as a percentage) changes from inning to inning.
               </em>
             </p>
           </div>
