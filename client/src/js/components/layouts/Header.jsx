@@ -43,10 +43,12 @@ class Header extends Component {
 					<div id="navbar-menu" className="navbar-collapse collapse">
             <form className="navbar-form navbar-left hidden-xs" onSubmit={this.search}>
 							<div className="input-group">
-								<input type="text" value="" className="form-control" placeholder="Search pitchers..."
+								<input type="text" value="" className="form-control" placeholder="Enter pitcher name..."
                   value={this.state.playerLName} onChange={this.onChange}/>
 								<span className="input-group-btn">
-                  <button type="button" type="submit" className="btn btn-primary">Go</button>
+                  <button type="button" type="submit" className="btn btn-primary">
+                    <i className="fa fa-search"></i> Search Pitchers
+                  </button>
                 </span>
 							</div>
 						</form>
