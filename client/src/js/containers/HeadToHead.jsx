@@ -89,10 +89,12 @@ export default class extends Component {
               </div>
 
               <BarChart height={400} data={pitchSelectionTrend} />
-              <em>
-              Shows the total number of pitches of each pitch type thrown to the batter for each time faced
-              in a game.
-              </em>
+              <div className="text-center">
+                <em>
+                Shows the total number of pitches of each pitch type thrown to the batter for each plate appearance (PA)
+                in a game.
+                </em>
+              </div>
             </div>
           }
         </div>

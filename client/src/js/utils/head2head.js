@@ -90,9 +90,9 @@ module.exports = {
       //the 'name' property of obj corresponds to timesFaced. It's called 'name' to make it easier
       //to work with in the chart
       let obj = {};
-      let index = _.findIndex(trend, (t) => t.name === `Times faced: ${d.timesFaced}`);
+      let index = _.findIndex(trend, (t) => t.name === `PA: ${d.timesFaced}`);
       if (index === -1) {
-        obj.name = `Times faced: ${d.timesFaced}`;
+        obj.name = `PA: ${d.timesFaced}`;
         obj[d.pitchType] = 1;
         trend.push(obj);
       } else {
