@@ -39,6 +39,10 @@ th {
   padding: 30px;
 }
 
+.brand a {
+  color:#D0D3D4;
+}
+
 .page-title {
   margin-top: 0;
   margin-bottom: 30px;
@@ -308,6 +312,7 @@ button.toast-close-button {
   background-color: #2B333E;
   float: left;
   position: fixed;
+  color: #D0D3D4;
 }
 #wrapper .sidebar .footer {
   display: block;
