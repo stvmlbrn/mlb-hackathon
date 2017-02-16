@@ -82,7 +82,8 @@ module.exports = {
 
   //how the pitch selection against a specific hitter changes
   //as the game goes on, e.g, pitch selection of the first plate
-  //appearance in a game vs the 3rd or 4th PA in a game.
+  //appearance in a game vs the 3rd or 4th PA in a game. Pitches
+  //are represented as a percentage of total pitches thrown in each PA
   pitchSelectionTrend(dataset) {
     var trend = [];
 
@@ -109,6 +110,9 @@ module.exports = {
       }
     });
 
+    //We now have a count of each pitch type per plate appearance, and the total number
+    //of pitches for each plate appearance. Calculate the pitch type percentage, and then
+    //remove the totalPitches from the object so it doesn't mess up the chart.
     trend.map(t => {
       var {totalPitches} = t;
       Object.keys(t).map(key => {
