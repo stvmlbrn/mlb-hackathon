@@ -14,11 +14,11 @@ export default class extends Component {
         runner1: false,
         runner2: false,
         runner3: false,
-        balls: 0,
-        strikes: 0,
-        outs: 0,
-        batter: 'all',
-        inning: 'all'
+        balls: 'any',
+        strikes: 'any',
+        outs: 'any',
+        batter: 'any',
+        inning: 'any'
       },
       analysis: [],
       totalPitches: -1

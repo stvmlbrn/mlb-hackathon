@@ -9,6 +9,7 @@ function SituationForm(props) {
         <label className="col-sm-3 control-label">Balls</label>
         <div className="col-sm-9">
           <select name="balls" className="form-control" onChange={onChange} value={criteria.balls}>
+            <option value="any">Any</option>
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -20,6 +21,7 @@ function SituationForm(props) {
         <label htmlFor="" className="col-sm-3 control-label">Strikes</label>
         <div className="col-sm-9">
           <select name="strikes" className="form-control" onChange={onChange} value={criteria.strikes}>
+            <option value="any">Any</option>
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -30,6 +32,7 @@ function SituationForm(props) {
         <label htmlFor="" className="col-sm-3 control-label">Outs</label>
         <div className="col-sm-9">
           <select name="outs" className="form-control" onChange={onChange} value={criteria.outs}>
+            <option value="any">Any</option>
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -54,7 +57,7 @@ function SituationForm(props) {
         <label htmlFor="" className="col-sm-3 control-label">Inning</label>
         <div className="col-sm-9">
           <select name="inning" className="form-control" onChange={onChange} value={criteria.inning}>
-            <option value="all">All</option>
+            <option value="any">Any</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -71,7 +74,7 @@ function SituationForm(props) {
         <label htmlFor="" className="col-sm-3 control-label">Batter</label>
         <div className="col-sm-9">
           <select name="batter" className="form-control" onChange={onChange} value={criteria.batter}>
-            <option value="all">All</option>
+            <option value="any">Any</option>
             <option value="L">Left</option>
             <option value="R">Right</option>
           </select>
