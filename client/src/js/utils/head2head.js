@@ -94,6 +94,7 @@ module.exports = {
       if (index === -1) {
         obj.name = `PA: ${d.timesFaced}`;
         obj[d.pitchType] = 1;
+        obj.totalPitches = 1;
         trend.push(obj);
       } else {
         obj = trend[index];
@@ -102,8 +103,20 @@ module.exports = {
         } else {
           obj[d.pitchType] = 1;
         }
+        obj.totalPitches++;
+
         trend[index] = obj;
       }
+    });
+
+    trend.map(t => {
+      var {totalPitches} = t;
+      Object.keys(t).map(key => {
+        if (key !== 'name' && key !== 'totalPitches') {
+          t[key] = ((t[key] / totalPitches) * 100).toFixed(2);
+        }
+        delete t.totalPitches;
+      });
     });
 
     return _.sortBy(trend, (t) => t.name);

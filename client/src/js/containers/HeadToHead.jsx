@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 
 import PlayerPhoto from '../components/playerPhoto';
-import BarChart from '../components/charts/BarChart';
+import StackedBarChart from '../components/charts/StackedBarChart';
 import Head2HeadBanner from '../components/Head2HeadBanner';
 import SituationAnalysisResults from '../components/SituationAnalysisResults';
 
 import head2head from '../utils/head2head';
 import general from '../utils/general';
+import selection from '../utils/selection';
 
 export default class extends Component {
   constructor(props) {
@@ -88,7 +89,7 @@ export default class extends Component {
                 <SituationAnalysisResults totalPitches={totalPitches} pitchTotals={pitchTotals} analysis={pitchSelectionTotals} />
               </div>
 
-              <BarChart height={400} data={pitchSelectionTrend} />
+              <StackedBarChart height={400} data={pitchSelectionTrend} />
               <div className="text-center">
                 <em>
                 Shows the total number of pitches of each pitch type thrown to the batter for each plate appearance (PA)
