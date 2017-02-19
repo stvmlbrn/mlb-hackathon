@@ -2,43 +2,39 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 
 import SearchResults from '../components/SearchResults';
+import PanelNoControls from '../components/panels/PanelNoControls';
 
 export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerLName: '',
       players: [],
-      searching: false
+      searching: true
     }
   }
 
   componentDidMount() {
     if (this.props.location.query.name) {
-      this.setState({
-        playerLName: this.props.location.query.name
-      }, this.search);
+      this.search();
     }
   }
 
   componentWillReceiveProps(nextProps) {
     var nextName = nextProps.location.query.name;
-    var {playerLName} = this.state;
 
-    if (nextName && (nextName != playerLName)) {
-      this.setState({
-        playerLName: this.props.location.query.name
-      }, this.search);
+    this.setState({searching: true}, this.search);
+
+    /* if (nextName && (nextName != this.props.location.query.name)) {
+      this.search();
     } else {
       this.setState({criteria: '', results: [], searching: false});
-    }
+    } */
   }
 
 
   search() {
-    var {playerLName} = this.state;
+    var playerLName = this.props.location.query.name;
 
-    this.setState({searching: true});
     Axios.get(`/player?name=${playerLName}`)
       .then(result => this.setState({players: result.data, searching: false}));
   }
@@ -49,21 +45,27 @@ export default class extends Component {
     if (searching) {
       return (
         <div>
-          <i className="fa fa-spinner fa-spin"></i> Search players...
+          <i className="fa fa-spinner fa-spin"></i> Search pitchers...
         </div>
       );
     } else {
-      return (
-        <div className="row">
-          {players.map(p => {
-            return (
-              <div key={p.pitcherId} className="col-md-4 col-sm-6 col-xs-12">
-                <SearchResults key={p.pitcherId} player={p}/>
-              </div>
-            );
-          })}
-        </div>
-      );
+      if (!players.length) {
+        return (
+          <PanelNoControls>No matching pitchers were found...</PanelNoControls>
+        );
+      } else {
+        return (
+          <div className="row">
+            {players.map(p => {
+              return (
+                <div key={p.pitcherId} className="col-md-4 col-sm-6 col-xs-12">
+                  <SearchResults key={p.pitcherId} player={p}/>
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
     }
   }
 };
