@@ -6,6 +6,7 @@ import HeadToHead from './HeadToHead';
 import PitchSelection from './PitchSelection';
 import SituationAnalysis from './SituationAnalysis';
 import PlayerBanner from './PlayerBanner';
+import PitchMetrics from './PitchMetrics';
 
 import PanelNoControls from '../components/panels/PanelNoControls';
 
@@ -117,6 +118,9 @@ export default class extends Component {
             <Tabs id="controlled-tab-example">
               <Tab eventKey={1} title="Pitch Selection">
                 <PitchSelection inningBreakdown={pitchSelectionData.inningBreakdown} overall={pitchSelectionData.overall} />
+              </Tab>
+              <Tab eventKey={5} title="Pitch Metrics">
+                <PitchMetrics dataset={dataset} />
               </Tab>
               <Tab eventKey={2} title="Pitch Effectiveness">
 
