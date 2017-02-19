@@ -23,12 +23,6 @@ export default class extends Component {
     var nextName = nextProps.location.query.name;
 
     this.setState({searching: true}, this.search);
-
-    /* if (nextName && (nextName != this.props.location.query.name)) {
-      this.search();
-    } else {
-      this.setState({criteria: '', results: [], searching: false});
-    } */
   }
 
 
