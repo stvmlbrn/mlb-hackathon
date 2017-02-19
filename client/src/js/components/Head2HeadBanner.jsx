@@ -4,6 +4,11 @@ import Box from './box';
 
 function Head2HeadBanner(props) {
   var {pa, pppa, avg, h, bb, k} = props;
+
+  if (isNaN(avg)) {
+    avg = '--';
+  }
+
   return (
     <div>
       <div className="row">
@@ -16,11 +21,6 @@ function Head2HeadBanner(props) {
         <div className="col-md-4"><Box number={bb} title="Walks"/></div>
         <div className="col-md-4"><Box number={k} title="Strike Outs"/></div>
       </div>
-      {/* <div className="row">
-        <div className="col-md-12">
-          <BarChart height={300}/>
-        </div>
-      </div> */}
     </div>
   );
 };
