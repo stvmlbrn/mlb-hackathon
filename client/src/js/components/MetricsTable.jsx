@@ -9,6 +9,7 @@ function MetricsTable(props) {
           <th>Pitch Type</th>
           <th>Avg Velocity</th>
           <th>Avg Spin Rate</th>
+          <th>Avg Called Strike Probability</th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +19,7 @@ function MetricsTable(props) {
               <td>{p.pitchType}</td>
               <td>{p.avgVelocity}</td>
               <td>{p.avgSpinRate}</td>
+              <td>{p.avgProbCalledStrike}</td>
             </tr>
           );
         })}

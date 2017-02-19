@@ -4,8 +4,8 @@ module.exports = {
   calculateMetrics(dataset) {
     var metrics = [];
 
-    //When working with spin rate below, need to make sure a value exists. Some records
-    //in the db don't have a spin rate recorded.
+    //When working with spin rate and called strike probability, need to make sure a value exists. Some records
+    //in the db don't have a value recorded.
 
     dataset.map(d => {
       let index = _.findIndex(metrics, (m) => m.pitchType === d.pitchType);
@@ -15,6 +15,7 @@ module.exports = {
           count: 1,
           velocity: [parseFloat(d.releaseVelocity)],
           spinRate: d.spinRate.length ? [parseFloat(d.spinRate)] : [],
+          calledStrike: d.probCalledStrike.length ? [parseFloat(d.probCalledStrike)] : [],
           ss: d.pitchResult === 'SS' ? 1 : 0
         });
       } else {
@@ -23,6 +24,9 @@ module.exports = {
         obj.velocity.push(parseFloat(d.releaseVelocity));
         if (d.spinRate.length) {
           obj.spinRate.push(parseFloat(d.spinRate));
+        }
+        if (d.probCalledStrike.length) {
+          obj.calledStrike.push(parseFloat(d.probCalledStrike));
         }
         if (d.pitchResult === 'SS') {
           obj.ss++;
@@ -35,14 +39,17 @@ module.exports = {
     metrics.map(m => {
       var avgVelocity = (m.velocity.reduce((a, b) => a + b, 0) / m.count).toFixed(1);
       var avgSpinRate = (m.spinRate.reduce((a, b) => a + b, 0) / m.spinRate.length).toFixed(2);
+      var avgProbCalledStrike = (m.calledStrike.reduce((a, b) => a + b, 0) / m.calledStrike.length).toFixed(3);
       var ssPercentage = (m.ss / m.count).toFixed(2);
 
       m.avgVelocity = avgVelocity;
       m.avgSpinRate = avgSpinRate;
       m.ssPercentage = ssPercentage;
+      m.avgProbCalledStrike = avgProbCalledStrike;
 
       delete m.velocity;
       delete m.spinRate;
+      delete m.calledStrike;
     });
 
     return metrics;
