@@ -44,8 +44,25 @@ module.exports = {
     return totals;
   },
 
-  //return a list of colors used in charts.
+  //return a list of colors used in charts. Designed so each pitch type is always the same color
   chartColors() {
-    return ['#B30D27', '#BD690E', '#0D5A77', '#35A20C', '#291983', '#b2bd78', '#ff540e', '#fdd75c'];
+    var colors = {
+      'CH': '#B30D27',
+      'CU': '#BD690E',
+      'FA': '#0D5A77',
+      'FT': '#35A20C',
+      'FF': '#291983',
+      'FC': '#b2bd78',
+      'SL': '#ff540e',
+      'FS': '#fdd75c',
+      'SI': '#181F17',
+      'FO': '#0DFFD0',
+      'KN': '#13E2FF',
+      'KC': '#FF0E0E',
+      'SC': '#F48CC5',
+      'GY': '#FFC493',
+      'EP': '#589999'
+    };
+    return colors;
   }
 }

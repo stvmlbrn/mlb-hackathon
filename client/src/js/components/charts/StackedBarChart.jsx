@@ -10,7 +10,6 @@ function StackedBarChart(props) {
   var {data} = props;
   var dataPoints = [];
   var colors = general.chartColors();
-  var colorIndex = -1;
 
   data.map(d => {
     Object.keys(d).map(key => {
@@ -29,9 +28,8 @@ function StackedBarChart(props) {
         <Tooltip/>
         <Legend />
         {dataPoints.map(d => {
-          colorIndex++;
           return (
-            <Bar key={d} dataKey={d} stackId="a" fill={colors[colorIndex]} />
+            <Bar key={d} dataKey={d} stackId="a" fill={colors[d]} />
           );
         })}
       </BarChart>
