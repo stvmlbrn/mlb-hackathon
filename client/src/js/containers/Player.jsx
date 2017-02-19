@@ -11,7 +11,6 @@ import PitchMetrics from './PitchMetrics';
 import PanelNoControls from '../components/panels/PanelNoControls';
 
 import banner from '../utils/banner';
-import selection from '../utils/selection';
 import general from '../utils/general';
 
 export default class extends Component {
@@ -30,10 +29,6 @@ export default class extends Component {
         appearances: 0,
         totalPitches: 0,
         avgPitchCount: 0
-      },
-      pitchSelectionData: {
-        inningBreakdown: [],
-        overall: []
       }
     }
   }
@@ -60,7 +55,6 @@ export default class extends Component {
 
   loadInitialStats = () => {
     this.calculateBannerData();
-    this.calculatePitchSelectionData();
     this.calculatePitchTotals();
   }
 
@@ -83,16 +77,6 @@ export default class extends Component {
     };
 
     this.setState({bannerData: bannerData});
-    this.calculatePitchSelectionData();
-  }
-
-  calculatePitchSelectionData = () => {
-    var {dataset, pitchSelectionData} = this.state;
-
-    pitchSelectionData.inningBreakdown = selection.inningBreakdown(dataset);
-    pitchSelectionData.overall = selection.overall(dataset);
-
-    this.setState({pitchSelectionData: pitchSelectionData});
   }
 
   selectSeason = (e) => {
@@ -102,7 +86,7 @@ export default class extends Component {
   }
 
   render() {
-    var {name, bannerData, pitchSelectionData, pitcherId, season, loading, dataset, pitchTotals} = this.state;
+    var {name, bannerData, pitcherId, season, loading, dataset, pitchTotals} = this.state;
     var dataFound = false;
 
     if (!loading && dataset.length) {
@@ -117,7 +101,7 @@ export default class extends Component {
           <PanelNoControls>
             <Tabs id="controlled-tab-example">
               <Tab eventKey={1} title="Pitch Selection">
-                <PitchSelection inningBreakdown={pitchSelectionData.inningBreakdown} overall={pitchSelectionData.overall} />
+                <PitchSelection dataset={dataset}/>
               </Tab>
               <Tab eventKey={5} title="Pitch Metrics">
                 <PitchMetrics dataset={dataset} />

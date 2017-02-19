@@ -5,7 +5,7 @@ module.exports = {
 
   },
 
-  inningBreakdown(dataset) {
+  inningBreakdown(dataset, batter) {
     var data = [
       {name: 'Inning 1', totalPitches: 0},
       {name: 'Inning 2', totalPitches: 0},
@@ -20,17 +20,19 @@ module.exports = {
 
 
     dataset.map(d => {
-      var index = d.inning - 1;
-      var inningData = data[index];
-      inningData.totalPitches++;
+      if (batter === 'any' || d.batterHand === batter) {
+        let index = d.inning - 1;
+        let inningData = data[index];
+        inningData.totalPitches++;
 
-      if (inningData.hasOwnProperty(d.pitchType)) {
-        inningData[d.pitchType]++;
-      } else {
-        inningData[d.pitchType] = 1;
+        if (inningData.hasOwnProperty(d.pitchType)) {
+          inningData[d.pitchType]++;
+        } else {
+          inningData[d.pitchType] = 1;
+        }
+
+        data[index] = inningData;
       }
-
-      data[index] = inningData;
     });
 
     data.map(d => {
@@ -46,20 +48,24 @@ module.exports = {
     return data;
   },
 
-  overall(dataset) {
+  overall(dataset, batter) {
     var overallData = [];
+    var pitches = 0;
 
     dataset.map(d => {
-      var index = _.findIndex(overallData, (o) => o.name === d.pitchType);
-      if (index === -1) {
-        overallData.push({name: d.pitchType, count: 1});
-      } else {
-        overallData[index].count++;
+      if (batter === 'any' || d.batterHand !== batter) {
+        pitches++;
+        let index = _.findIndex(overallData, (o) => o.name === d.pitchType);
+        if (index === -1) {
+          overallData.push({name: d.pitchType, count: 1});
+        } else {
+          overallData[index].count++;
+        }
       }
     });
 
     overallData.map(o => {
-      o.value = parseFloat(((o.count / dataset.length) * 100).toFixed(2));
+      o.value = parseFloat(((o.count / pitches) * 100).toFixed(2));
       delete o.count;
     });
 
