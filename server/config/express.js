@@ -39,6 +39,12 @@ module.exports = function(app) {
   app.use(helmet());
   app.use(methodOverride());
 
+  //Put the runtime environment into every page.
+  app.use(function(req, res, next) {
+    res.locals.environment = env;
+    next();
+  });
+
   app.use(require(appRoot + '/server/controllers'));
 
   app.use(function (req, res, next) {
