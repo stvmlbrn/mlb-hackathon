@@ -92,8 +92,7 @@ export default class extends Component {
               <StackedBarChart height={400} data={pitchSelectionTrend} />
               <div className="text-center">
                 <em>
-                Shows the total number of pitches of each pitch type thrown to the batter for each plate appearance (PA)
-                in a game.
+                Shows how the pitch selection (as a percentage) changes against the selected batter as the game progresses.
                 </em>
               </div>
             </div>
