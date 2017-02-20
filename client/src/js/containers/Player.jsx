@@ -103,11 +103,8 @@ export default class extends Component {
               <Tab eventKey={1} title="Pitch Selection">
                 <PitchSelection dataset={dataset}/>
               </Tab>
-              <Tab eventKey={5} title="Pitch Metrics">
+              <Tab eventKey={2} title="Pitch Metrics">
                 <PitchMetrics dataset={dataset} />
-              </Tab>
-              <Tab eventKey={2} title="Pitch Effectiveness">
-
               </Tab>
               <Tab eventKey={3} title="Situational Analysis">
                 <SituationAnalysis dataset={dataset} pitchTotals={pitchTotals} />
