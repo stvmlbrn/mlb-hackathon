@@ -61,7 +61,8 @@ module.exports = {
       'KC': '#FF0E0E',
       'SC': '#F48CC5',
       'GY': '#FFC493',
-      'EP': '#589999'
+      'EP': '#589999',
+      'SI': '#FDA8AA'
     };
     return colors;
   }
