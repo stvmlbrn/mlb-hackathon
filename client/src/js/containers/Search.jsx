@@ -39,7 +39,7 @@ export default class extends Component {
     if (searching) {
       return (
         <div>
-          <i className="fa fa-spinner fa-spin"></i> Search pitchers...
+          <i className="fa fa-spinner fa-spin"></i> Searching pitchers...
         </div>
       );
     } else {
