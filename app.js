@@ -1,13 +1,13 @@
 require('dotenv').config();
 
-var appRoot = require('app-root-path');
-var express = require('express');
-var logger = require(appRoot + '/server/config/logger');
-var ngrok = process.env.ENABLE_TUNNEL ? require('ngrok') : false;
+const appRoot = require('app-root-path');
+const express = require('express');
+const logger = require(`${appRoot}/server/config/logger`);
+const ngrok = process.env.ENABLE_TUNNEL ? require('ngrok') : false;
 
-var app = express();
+const app = express();
 
-require(appRoot + '/server/config/express')(app);
+require(`${appRoot}/server/config/express`)(app);
 
 app.listen(process.env.PORT, function() {
   if (ngrok) {
@@ -18,7 +18,7 @@ app.listen(process.env.PORT, function() {
       logger.info(`Server started. Tunnel running at url ${url}`);
     });
   } else {
-    logger.info('Server listening on port ' + process.env.PORT);
+    logger.info(`Server listening on port ${process.env.PORT}`);
   }
 });
 
