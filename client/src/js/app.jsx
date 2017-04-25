@@ -1,6 +1,6 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router';
+import { render } from 'react-dom';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import '../css/bootstrap.css';
 import '../css/main.css';
@@ -17,9 +17,9 @@ import Player from './containers/Player';
 render(
   <Router history={hashHistory}>
     <Route path='/' component={Layout}>
-      <IndexRoute component={Index}></IndexRoute>
-      <Route path='/search' component={Search}></Route>
-      <Route path='/player/:id' component={Player}></Route>
+      <IndexRoute component={Index} />
+      <Route path='/search' component={Search} />
+      <Route path='/player/:id' component={Player} />
     </Route>
   </Router>,
   document.getElementById('app')
