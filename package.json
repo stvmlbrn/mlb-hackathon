@@ -29,6 +29,7 @@
     "morgan": "^1.6.1",
     "mysql": "^2.8.0",
     "ngrok": "^2.2.5",
+    "prop-types": "^15.5.8",
     "pug": "^2.0.0-beta6",
     "react": "^15.0.2",
     "react-bootstrap": "^0.30.7",
