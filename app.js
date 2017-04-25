@@ -9,7 +9,7 @@ const app = express();
 
 require(`${appRoot}/server/config/express`)(app);
 
-app.listen(process.env.PORT, function() {
+app.listen(process.env.PORT, () => {
   if (ngrok) {
     ngrok.connect(process.env.PORT, (err, url) => {
       if (err) {
