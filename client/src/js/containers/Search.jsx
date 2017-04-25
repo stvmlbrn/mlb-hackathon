@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Axios from 'axios';
 
 import SearchResults from '../components/SearchResults';
@@ -9,8 +9,8 @@ export default class extends Component {
     super(props);
     this.state = {
       players: [],
-      searching: true
-    }
+      searching: true,
+    };
   }
 
   componentDidMount() {
@@ -20,26 +20,24 @@ export default class extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    var nextName = nextProps.location.query.name;
-
-    this.setState({searching: true}, this.search);
+    this.setState({ searching: true }, this.search);
   }
 
 
   search() {
-    var playerLName = this.props.location.query.name;
+    const playerLName = this.props.location.query.name;
 
     Axios.get(`/player?name=${playerLName}`)
-      .then(result => this.setState({players: result.data, searching: false}));
+      .then(result => this.setState({ players: result.data, searching: false }));
   }
 
   render() {
-    var {players, searching} = this.state;
+    const { players, searching } = this.state;
 
     if (searching) {
       return (
         <div>
-          <i className="fa fa-spinner fa-spin"></i> Searching pitchers...
+          <i className="fa fa-spinner fa-spin" /> Searching pitchers...
         </div>
       );
     } else {
@@ -50,10 +48,10 @@ export default class extends Component {
       } else {
         return (
           <div className="row">
-            {players.map(p => {
+            {players.map((p) => {
               return (
                 <div key={p.pitcherId} className="col-md-4 col-sm-6 col-xs-12">
-                  <SearchResults key={p.pitcherId} player={p}/>
+                  <SearchResults key={p.pitcherId} player={p} />
                 </div>
               );
             })}
@@ -62,4 +60,4 @@ export default class extends Component {
       }
     }
   }
-};
+}
