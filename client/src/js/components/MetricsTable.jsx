@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function MetricsTable(props) {
-  var {pitchMetrics} = props;
+  const { pitchMetrics } = props;
   return (
     <table className="table table-condensed table-stripe table-bordered">
       <thead>
@@ -13,7 +14,7 @@ function MetricsTable(props) {
         </tr>
       </thead>
       <tbody>
-        {pitchMetrics.map(p => {
+        {pitchMetrics.map((p) => {
           return (
             <tr key={p.pitchType}>
               <td>{p.pitchType}</td>
@@ -26,6 +27,10 @@ function MetricsTable(props) {
       </tbody>
     </table>
   );
+}
+
+MetricsTable.propTypes = {
+  pitchMetrics: PropTypes.object.isRequired,
 };
 
 export default MetricsTable;

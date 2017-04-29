@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import SituationForm from '../components/SituationForm';
 import TrendArrow from '../components/icons/TrendArrow';
@@ -6,7 +7,7 @@ import SituationAnalysisResults from '../components/SituationAnalysisResults';
 
 import situation from '../utils/situation';
 
-export default class extends Component {
+class SituationAnalysis extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,23 +27,22 @@ export default class extends Component {
   }
 
   onChange = (e) => {
-    var {criteria} = this.state;
+    const { criteria } = this.state;
     criteria[e.target.name] = e.target.value;
     this.setState({criteria: criteria});
   }
 
   onRunnerChange = (e) => {
-    var {criteria} = this.state;
+    const { criteria } = this.state;
     criteria[e.target.name] = e.target.checked;
     this.setState({criteria: criteria});
   }
 
   analyze = (e) => {
     e.preventDefault();
-    var {criteria} = this.state;
-    var {dataset} = this.props;
+    const { criteria } = this.state;
+    const { dataset } = this.props;
     var totalPitches = 0;
-
     var results = situation.analyze(dataset, criteria);
 
     results.map(r => {
@@ -56,8 +56,8 @@ export default class extends Component {
   }
 
   render() {
-    var {criteria, analysis, totalPitches} = this.state;
-    var {pitchTotals} = this.props;
+    const { criteria, analysis, totalPitches } = this.state;
+    const { pitchTotals } = this.props;
 
     return (
       <div className="row">
@@ -73,3 +73,10 @@ export default class extends Component {
     );
   }
 };
+
+SituationAnalysis.propTypes = {
+  dataset: PropTypes.object.isRequired,
+  pitchTotals: PropTypes.object.isRequired,
+};
+
+export default SituationAnalysis;

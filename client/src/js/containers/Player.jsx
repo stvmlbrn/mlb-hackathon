@@ -66,7 +66,7 @@ export default class extends Component {
   }
 
   calculateBannerData = () => {
-    var {bannerData, dataset} = this.state;
+    var { bannerData, dataset } = this.state;
     var appearances = banner.appearances(dataset);
     var avgPitchCount = banner.avgPitchCount(appearances, dataset.length).toLocaleString();
 
@@ -86,7 +86,7 @@ export default class extends Component {
   }
 
   render() {
-    var {name, bannerData, pitcherId, season, loading, dataset, pitchTotals} = this.state;
+    const { name, bannerData, pitcherId, season, loading, dataset, pitchTotals } = this.state;
     var dataFound = false;
 
     if (!loading && dataset.length) {
@@ -97,6 +97,7 @@ export default class extends Component {
       <div>
         <PlayerBanner data={bannerData} pitcherId={pitcherId} name={name}
           selectSeason={this.selectSeason} season={season} />
+
         {dataFound &&
           <PanelNoControls>
             <Tabs id="controlled-tab-example">

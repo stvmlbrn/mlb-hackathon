@@ -42,7 +42,7 @@ function PlayerBanner(props) {
 
 PlayerBanner.propTypes = {
   data: PropTypes.object.isRequired,
-  pitcherId: PropTypes.number.isRequired,
+  pitcherId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   name: PropTypes.string.isRequired,
   selectSeason: PropTypes.func.isRequired,
   season: PropTypes.number.isRequired,

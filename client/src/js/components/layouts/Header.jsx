@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router';
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router';
 import axios from 'axios';
 
 class Header extends Component {
@@ -17,8 +17,8 @@ class Header extends Component {
   search = (e) => {
     if (e) e.preventDefault();
 
-    var {router} = this.props;
-    var {playerLName} = this.state;
+    const { router } = this.props;
+    const { playerLName } = this.state;
 
     if (playerLName.length) {
       router.push(`/search?name=${playerLName}`);
@@ -28,6 +28,8 @@ class Header extends Component {
   }
 
   render() {
+    const { playerLName } = this.state;
+
     return (
       <div className="navbar navbar-default">
         <div className="container-fluid">
@@ -44,7 +46,7 @@ class Header extends Component {
             <form className="navbar-form navbar-left hidden-xs" onSubmit={this.search}>
 							<div className="input-group">
 								<input type="text" value="" className="form-control" placeholder="Enter pitcher name..."
-                  value={this.state.playerLName} onChange={this.onChange}/>
+                  value={playerLName} onChange={this.onChange}/>
 								<span className="input-group-btn">
                   <button type="button" type="submit" className="btn btn-primary">
                     <i className="fa fa-search"></i> Search Pitchers

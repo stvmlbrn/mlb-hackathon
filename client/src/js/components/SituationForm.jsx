@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function SituationForm(props) {
-  var {onSubmit, onChange, onRunnerChange, criteria} = props;
+  const { onSubmit, onChange, onRunnerChange, criteria } = props;
 
   return (
     <form className="form-horizontal" onSubmit={onSubmit}>
@@ -43,13 +44,13 @@ function SituationForm(props) {
         <label htmlFor="" className="col-sm-3 control-label">Runners</label>
         <div className="col-sm-9">
           <label htmlFor="runner1" className="checkbox-inline">
-            <input type="checkbox" name="runner1" id="runner1" onChange={onRunnerChange} checked={criteria.runner1}/> 1st
+            <input type="checkbox" name="runner1" id="runner1" onChange={onRunnerChange} checked={criteria.runner1} /> 1st
           </label>
           <label htmlFor="runner2" className="checkbox-inline">
-            <input type="checkbox" name="runner2" id="runner2" onChange={onRunnerChange} checked={criteria.runner2}/> 2nd
+            <input type="checkbox" name="runner2" id="runner2" onChange={onRunnerChange} checked={criteria.runner2} /> 2nd
           </label>
           <label htmlFor="runner3" className="checkbox-inline">
-            <input type="checkbox" name="runner3" id="runner3" onChange={onRunnerChange} checked={criteria.runner3}/> 3rd
+            <input type="checkbox" name="runner3" id="runner3" onChange={onRunnerChange} checked={criteria.runner3} /> 3rd
           </label>
         </div>
       </div>
@@ -89,6 +90,13 @@ function SituationForm(props) {
       </div>
     </form>
   );
+}
+
+SituationForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onRunnerChange: PropTypes.func.isRequired,
+  criteria: PropTypes.object.isRequired,
 };
 
 export default SituationForm;

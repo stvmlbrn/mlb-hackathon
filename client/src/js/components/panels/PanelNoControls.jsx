@@ -1,22 +1,29 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function PanelNoControls(props) {
+  const { title, children } = props;
   return (
     <div className="panel">
-      {props.title && (
+      {title && (
         <div className="panel-heading">
-          <h3 className="panel-title">{props.title}</h3>
+          <h3 className="panel-title">{title}</h3>
         </div>
       )}
       <div className="panel-body">
-        {props.children}
+        {children}
       </div>
     </div>
   );
-};
+}
 
 PanelNoControls.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
+};
+
+PanelNoControls.defaultProps = {
+  title: '',
 };
 
 export default PanelNoControls;

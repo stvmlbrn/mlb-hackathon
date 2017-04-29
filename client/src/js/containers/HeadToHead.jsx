@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import PlayerPhoto from '../components/playerPhoto';
 import StackedBarChart from '../components/charts/StackedBarChart';
@@ -26,7 +26,7 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    var {dataset, pitcherId} = this.props;
+    var { dataset, pitcherId } = this.props;
     var batters = head2head.getBatters(dataset, pitcherId);
 
     this.setState({batters: batters});
@@ -39,7 +39,7 @@ export default class extends Component {
   }
 
   getMatchupData = () => {
-    var {pitcherId, dataset} = this.props;
+    var { pitcherId, dataset } = this.props;
     var {batterId} = this.state;
     var matchupData = head2head.getMatchupData(dataset, pitcherId, batterId);
     var pa = head2head.countPlateAppearances(matchupData);
