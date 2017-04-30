@@ -30,7 +30,7 @@ function MetricsTable(props) {
 }
 
 MetricsTable.propTypes = {
-  pitchMetrics: PropTypes.object.isRequired,
+  pitchMetrics: PropTypes.array.isRequired,
 };
 
 export default MetricsTable;
