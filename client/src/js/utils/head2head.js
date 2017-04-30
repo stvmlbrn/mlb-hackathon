@@ -1,47 +1,70 @@
 import _ from 'lodash';
 
-module.exports = {
-  //find all the unique batters in the dataset and sort by batter name
-  getBatters(dataset, pitcherId) {
-    var batters = [];
+class Head2Head {
+  /**
+   * Find all the unique batters in the dataset
+   * @param {array} dataset - a set of pitcher data
+   * @param {number} pitcherId - the player ID of the pitcher
+   * @return {array} Batters faced by the pitches sorted by name.
+   */
+  static getBatters(dataset, pitcherId) {
+    let batters = [];
 
-    dataset.map(d => {
+    dataset.map((d) => {
       if (d.pitcherId == pitcherId) {
-        batters.push({batterId: d.batterId, batter: d.batter});
+        batters.push({ batterId: d.batterId, batter: d.batter });
       }
     });
 
-    batters = _.sortBy(_.uniqBy(batters, 'batterId'), (b) => b.batter);
+    batters = _.sortBy(_.uniqBy(batters, 'batterId'), b => b.batter);
     return batters;
-  },
+  }
 
-  getMatchupData(dataset, pitcherId, batterId) {
-    var data = []
+  /**
+   * Extract only the pitches from the dataset that include the provided
+   * pitcher and batter
+   * @param {array} dataset - a set of pitcher data
+   * @param {number} pitcherId - the player ID of the pitcher
+   * @param {number} batterId - the player ID of the batter
+   * @return {array} An array of objects containing pitch data for the pitcher/batter matchup
+   */
+  static getMatchupData(dataset, pitcherId, batterId) {
+    const data = [];
 
-    dataset.map(d => {
+    dataset.map((d) => {
       if (d.pitcherId == pitcherId && d.batterId == batterId) {
         data.push(d);
       }
     });
 
     return data;
-  },
+  }
 
-  countPlateAppearances(dataset) {
-    var pa = [];
+  /**
+   * Count the number of plate appearances for a batter against the pitcher.
+   * @param {array} dataset - Filtered dataset that includes only pitcher vs batter data.
+   * @return {number} Total number of plate appearances
+   */
+  static countPlateAppearances(dataset) {
+    const pa = [];
 
-    dataset.map(d => {
+    dataset.map((d) => {
       if (!_.includes(pa, `${d.gameDate}-${d.timesFaced}`)) {
         pa.push(`${d.gameDate}-${d.timesFaced}`);
       }
     });
 
     return pa.length;
-  },
+  }
 
-  countAtBats(dataset) {
-    var ab = 0;
-    var abResults = ['S','D','T','HR','IP_OUT','K','FC','DP','TP','ROE'];
+  /**
+   * Count the number of at-bats for the a batter against the pitcher
+   * @param {array} dataset - Filtered dataset that includes only pitcher vs batter data.
+   * @return {number} Total number of at-bats
+   */
+  static countAtBats(dataset) {
+    let ab = 0;
+    const abResults = ['S', 'D', 'T', 'HR', 'IP_OUT', 'K', 'FC', 'DP', 'TP', 'ROE'];
 
     dataset.map(d => {
       if ((_.includes(abResults, d.paResult)) && (d.paResult.length)) {
@@ -50,16 +73,21 @@ module.exports = {
     });
 
     return ab;
-  },
+  }
 
-  paResults(dataset) {
-    var bb = 0;
-    var k = 0;
-    var h = 0;
-    var avg = 0;
-    var ab = this.countAtBats(dataset);
+  /**
+   * Calculate the results of the pitcher/batter matchup
+   * @param {array} dataset - Filter dataset that includes only pitcher vs batter data.
+   * @return {object} Batter bb, k, h, avg against the pitcher
+   */
+  static paResults(dataset) {
+    let bb = 0;
+    let k = 0;
+    let h = 0;
+    let avg = 0;
+    const ab = this.countAtBats(dataset);
 
-    dataset.map(d => {
+    dataset.map((d) => {
       if (d.paResult === 'K') {
         k++;
       }
@@ -77,21 +105,24 @@ module.exports = {
       avg = avg.toString().substring(1);
     }
 
-    return {'bb': bb, 'k': k, 'h': h, 'avg': avg};
-  },
+    return { bb, k, h, avg };
+  }
 
-  //how the pitch selection against a specific hitter changes
-  //as the game goes on, e.g, pitch selection of the first plate
-  //appearance in a game vs the 3rd or 4th PA in a game. Pitches
-  //are represented as a percentage of total pitches thrown in each PA
-  pitchSelectionTrend(dataset) {
-    var trend = [];
+  /**
+   * How the pitch selection against a specific hitter changes as the game goes on. E.g., pitch
+   * selection of the first plate appearance in a game vs the 3rd or 4th PA in a game. Pitches
+   * are represented as a percentage of total pitches thrown in each PA.
+   * @param {array} dataset - Filtered dataset that includes only pitcher vs batter data
+   * @return {array}
+   */
+  static pitchSelectionTrend(dataset) {
+    const trend = [];
 
-    dataset.map(d => {
-      //the 'name' property of obj corresponds to timesFaced. It's called 'name' to make it easier
-      //to work with in the chart
+    dataset.map((d) => {
+      // the 'name' property of obj corresponds to timesFaced. It's called 'name' to make it easier
+      // to work with in the chart
       let obj = {};
-      let index = _.findIndex(trend, (t) => t.name === `PA: ${d.timesFaced}`);
+      const index = _.findIndex(trend, t => t.name === `PA: ${d.timesFaced}`);
       if (index === -1) {
         obj.name = `PA: ${d.timesFaced}`;
         obj[d.pitchType] = 1;
@@ -110,12 +141,12 @@ module.exports = {
       }
     });
 
-    //We now have a count of each pitch type per plate appearance, and the total number
-    //of pitches for each plate appearance. Calculate the pitch type percentage, and then
-    //remove the totalPitches from the object so it doesn't mess up the chart.
-    trend.map(t => {
-      var {totalPitches} = t;
-      Object.keys(t).map(key => {
+    // We now have a count of each pitch type per plate appearance, and the total number
+    // of pitches for each plate appearance. Calculate the pitch type percentage, and then
+    // remove the totalPitches from the object so it doesn't mess up the chart.
+    trend.map((t) => {
+      const { totalPitches } = t;
+      Object.keys(t).map((key) => {
         if (key !== 'name' && key !== 'totalPitches') {
           t[key] = ((t[key] / totalPitches) * 100).toFixed(2);
         }
@@ -123,6 +154,8 @@ module.exports = {
       });
     });
 
-    return _.sortBy(trend, (t) => t.name);
+    return _.sortBy(trend, t => t.name);
   }
-};
+}
+
+module.exports = Head2Head;

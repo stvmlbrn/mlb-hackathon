@@ -1,11 +1,11 @@
 import _ from 'lodash';
 
-module.exports = {
-  calculateMetrics(dataset) {
+class Metrics {
+  static calculateMetrics(dataset) {
     var metrics = [];
 
-    //When working with spin rate and called strike probability, need to make sure a value exists. Some records
-    //in the db don't have a value recorded.
+    // When working with spin rate and called strike probability, need to make sure a value exists. Some records
+    // in the db don't have a value recorded.
 
     dataset.map(d => {
       let index = _.findIndex(metrics, (m) => m.pitchType === d.pitchType);
@@ -53,9 +53,9 @@ module.exports = {
     });
 
     return metrics;
-  },
+  }
 
-  trend(dataset, pitchType) {
+  static trend(dataset, pitchType) {
     var trendData = [
       {name: 'Inning 1', count: 0, velocity: [], spinRate: []},
       {name: 'Inning 2', count: 0, velocity: [], spinRate: []},
@@ -91,9 +91,9 @@ module.exports = {
     });
 
     return trendData;
-  },
+  }
 
-  getPitchTypes(dataset) { //return an array of unique pitch types thrown by the pitcher
+  static getPitchTypes(dataset) { //return an array of unique pitch types thrown by the pitcher
     var pitchTypes = [];
 
     dataset.map(d => {
@@ -102,4 +102,6 @@ module.exports = {
 
     return _.uniq(pitchTypes).sort();
   }
-};
+}
+
+module.exports = Metrics;
