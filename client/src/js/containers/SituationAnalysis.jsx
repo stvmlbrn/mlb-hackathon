@@ -75,8 +75,8 @@ class SituationAnalysis extends Component {
 };
 
 SituationAnalysis.propTypes = {
-  dataset: PropTypes.object.isRequired,
-  pitchTotals: PropTypes.object.isRequired,
+  dataset: PropTypes.array.isRequired,
+  pitchTotals: PropTypes.array.isRequired,
 };
 
 export default SituationAnalysis;
