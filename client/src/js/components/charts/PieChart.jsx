@@ -1,27 +1,32 @@
 import React from 'react';
-import {PieChart, Pie, Legend, Sector, Cell, Tooltip, ResponsiveContainer} from 'recharts';
+import PropTypes from 'prop-types';
+import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 
 import general from '../../utils/general';
 
-var colors = general.chartColors();
+const colors = general.chartColors();
 
 function Chart(props) {
-  var {data} = props;
+  const { data } = props;
 
-  //add a 'fill' object for each pitch type so it appears in the chart as a different color
-  data.map((d, index) => {
+  // add a 'fill' object for each pitch type so it appears in the chart as a different color
+  data.map((d) => {
     d.fill = colors[d.name];
   });
 
   return (
     <ResponsiveContainer width="100%" height={400}>
       <PieChart>
-        <Pie data={data} margin={{top: 20, right: 30, left: 20, bottom: 10}} label/>
-        <Tooltip/>
-        <Legend/>
+        <Pie data={data} margin={{ top: 20, right: 30, left: 20, bottom: 10 }} label />
+        <Tooltip />
+        <Legend />
       </PieChart>
     </ResponsiveContainer>
   );
+}
+
+Chart.propTypes = {
+  data: PropTypes.array.isRequired,
 };
 
 export default Chart;
