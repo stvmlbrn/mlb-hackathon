@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MetricsTable from '../components/MetricsTable';
 import BiaxialLineChart from '../components/charts/BiaxialLineChart';
 
 import metrics from '../utils/metrics';
 
-export default class extends Component {
+class PitchMetrics extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,8 +23,8 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    var {dataset} = this.props;
-    var pitchTypes = metrics.getPitchTypes(dataset);
+    const { dataset } = this.props;
+    const pitchTypes = metrics.getPitchTypes(dataset);
 
     this.setState({
       pitchTypes: pitchTypes,
@@ -32,16 +33,16 @@ export default class extends Component {
   }
 
   getTrendData = () => {
-    var {dataset} = this.props;
-    var {selectedPitchType} = this.state;
-    var pitchMetrics = metrics.calculateMetrics(dataset);
-    var trendData = metrics.trend(dataset, selectedPitchType);
-    var velocityMin, velocityMax, spinRateMin, spinRateMax = 0;
-    var v = [];
-    var spin = [];
+    const { dataset } = this.props;
+    const { selectedPitchType } = this.state;
+    const pitchMetrics = metrics.calculateMetrics(dataset);
+    const trendData = metrics.trend(dataset, selectedPitchType);
+    let velocityMin, velocityMax, spinRateMin, spinRateMax = 0;
+    let v = [];
+    let spin = [];
 
-    trendData.map(t => {
-      //isNaN happens on innings with no records - need to ignore these
+    trendData.map((t) => {
+      // isNaN happens on innings with no records - need to ignore these
       if (!isNaN(t.avgVelocity)) {
         v.push(parseFloat(t.avgVelocity));
       }
@@ -72,7 +73,7 @@ export default class extends Component {
   }
 
   render() {
-    var {pitchMetrics, trend, velocityMin, velocityMax, spinRateMin, spinRateMax, pitchTypes} = this.state;
+    const { pitchMetrics, trend, velocityMin, velocityMax, spinRateMin, spinRateMax, pitchTypes } = this.state;
     return (
       <div>
         <MetricsTable pitchMetrics={pitchMetrics}/>
@@ -80,11 +81,7 @@ export default class extends Component {
           <div className="form-group">
             <label htmlFor="">Select Pitch Type</label>
             <select name="selectedPitchType" onChange={this.selectPitch} className="form-control">
-              {pitchTypes.map(p => {
-                return (
-                  <option value={p} key={p}>{p}</option>
-                );
-              })}
+              {pitchTypes.map(p => <option value={p} key={p}>{p}</option>)}
             </select>
           </div>
         </form>
@@ -94,3 +91,9 @@ export default class extends Component {
     );
   }
 }
+
+PitchMetrics.propTypes = {
+  dataset: PropTypes.array.isRequired,
+};
+
+export default PitchMetrics;

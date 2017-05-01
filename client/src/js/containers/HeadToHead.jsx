@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import PlayerPhoto from '../components/playerPhoto';
 import StackedBarChart from '../components/charts/StackedBarChart';
@@ -9,7 +10,7 @@ import head2head from '../utils/head2head';
 import general from '../utils/general';
 import selection from '../utils/selection';
 
-export default class extends Component {
+class HeadToHead extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,8 +27,8 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    var { dataset, pitcherId } = this.props;
-    var batters = head2head.getBatters(dataset, pitcherId);
+    const { dataset, pitcherId } = this.props;
+    const batters = head2head.getBatters(dataset, pitcherId);
 
     this.setState({batters: batters});
   }
@@ -39,14 +40,14 @@ export default class extends Component {
   }
 
   getMatchupData = () => {
-    var { pitcherId, dataset } = this.props;
-    var {batterId} = this.state;
-    var matchupData = head2head.getMatchupData(dataset, pitcherId, batterId);
-    var pa = head2head.countPlateAppearances(matchupData);
-    var paResults = head2head.paResults(matchupData);
-    var pppa = (matchupData.length / pa).toFixed(1);
-    var pitchSelectionTotals = general.pitchSelectionTotals(matchupData);
-    var pitchSelectionTrend = head2head.pitchSelectionTrend(matchupData);
+    const { pitcherId, dataset } = this.props;
+    const {batterId} = this.state;
+    const matchupData = head2head.getMatchupData(dataset, pitcherId, batterId);
+    const pa = head2head.countPlateAppearances(matchupData);
+    const paResults = head2head.paResults(matchupData);
+    const pppa = (matchupData.length / pa).toFixed(1);
+    const pitchSelectionTotals = general.pitchSelectionTotals(matchupData);
+    const pitchSelectionTrend = head2head.pitchSelectionTrend(matchupData);
 
     this.setState({
       matchupData: matchupData,
@@ -60,19 +61,15 @@ export default class extends Component {
   }
 
   render() {
-    var {batters, batterId, matchupData, paResults, pa, pppa, totalPitches, pitchSelectionTotals, pitchSelectionTrend} = this.state;
-    var {pitchTotals} = this.props;
+    const { batters, batterId, matchupData, paResults, pa, pppa, totalPitches, pitchSelectionTotals, pitchSelectionTrend } = this.state;
+    const { pitchTotals } = this.props;
 
     return (
       <div className="row">
         <div className="col-md-3 text-center">
           <select name="batterId" className="form-control" value={batterId} onChange={this.selectBatter}>
             <option value="">-- Select Batter --</option>
-            {batters.map(b => {
-              return (
-                <option key={b.batterId} value={b.batterId}>{b.batter}</option>
-              );
-            })}
+            {batters.map((b) => <option key={b.batterId} value={b.batterId}>{b.batter}</option>)}
           </select>
           <br/>
           {(batterId !== '') &&
@@ -102,3 +99,11 @@ export default class extends Component {
     );
   }
 };
+
+HeadToHead.propTypes = {
+  pitcherId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  dataset: PropTypes.array.isRequired,
+  pitchTotals: PropTypes.array.isRequired,
+};
+
+export default HeadToHead;

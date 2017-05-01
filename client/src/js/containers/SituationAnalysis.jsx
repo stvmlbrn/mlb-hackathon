@@ -42,8 +42,8 @@ class SituationAnalysis extends Component {
     e.preventDefault();
     const { criteria } = this.state;
     const { dataset } = this.props;
-    var totalPitches = 0;
-    var results = situation.analyze(dataset, criteria);
+    let totalPitches = 0;
+    let results = situation.analyze(dataset, criteria);
 
     results.map(r => {
       totalPitches += r.count;

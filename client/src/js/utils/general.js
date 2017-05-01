@@ -15,8 +15,7 @@ class General {
   }
 
   /**
-   * Calculates the total number of times a pitch was thrown, and the percentage
-   * for each pitch type out of the total number of pitches.
+   * Calculates specific data for each type of pitch thrown
    * @param {array} dataset - A set of pitch data for a pitcher
    * @return {array} A sorted array of objects with data on each type of pitch thrown.
    */

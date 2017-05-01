@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import StackedBarChart from '../components/charts/StackedBarChart';
 import PieChart from '../components/charts/PieChart';
 
 import selection from '../utils/selection';
 
-export default class extends Component {
+class PitchSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,15 +24,15 @@ export default class extends Component {
   }
 
   onChange = (e) => {
-    var state = this.state;
+    let state = this.state;
 
     state[e.target.name] = e.target.value;
     this.setState(state, this.calculatePitchSelectionData);
   }
 
   calculatePitchSelectionData = () => {
-    var {dataset} = this.props;
-    var {pitchSelectionData, batter} = this.state;
+    const { dataset } = this.props;
+    const { pitchSelectionData, batter } = this.state;
 
     pitchSelectionData.inningBreakdown = selection.inningBreakdown(dataset, batter);
     pitchSelectionData.overall = selection.overall(dataset, batter);
@@ -39,7 +41,7 @@ export default class extends Component {
   }
 
   render() {
-    var {pitchSelectionData, batter, selectedChart} = this.state;
+    const { pitchSelectionData, batter, selectedChart } = this.state;
 
     return (
       <div>
@@ -81,4 +83,10 @@ export default class extends Component {
       </div>
     );
   }
+}
+
+PitchSelection.propTypes = {
+  dataset: PropTypes.array.isRequired,
 };
+
+export default PitchSelection;

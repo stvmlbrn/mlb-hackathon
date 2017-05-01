@@ -10,7 +10,7 @@ import './vendors/bootstrap/bootstrap';
 import './vendors/klorofil';
 
 import Layout from './components/layouts/Layout';
-import Index from './containers/Index';
+import Index from './components/';
 import Search from './containers/Search';
 import Player from './containers/Player';
 

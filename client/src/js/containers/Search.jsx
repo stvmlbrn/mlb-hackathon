@@ -40,24 +40,24 @@ export default class extends Component {
           <i className="fa fa-spinner fa-spin" /> Searching pitchers...
         </div>
       );
-    } else {
-      if (!players.length) {
-        return (
-          <PanelNoControls>No matching pitchers were found...</PanelNoControls>
-        );
-      } else {
-        return (
-          <div className="row">
-            {players.map((p) => {
-              return (
-                <div key={p.pitcherId} className="col-md-4 col-sm-6 col-xs-12">
-                  <SearchResults key={p.pitcherId} player={p} />
-                </div>
-              );
-            })}
-          </div>
-        );
-      }
     }
+
+    if (!players.length) {
+      return (
+        <PanelNoControls>No matching pitchers were found...</PanelNoControls>
+      );
+    }
+
+    return (
+      <div className="row">
+        {players.map((p) => {
+          return (
+            <div key={p.pitcherId} className="col-md-4 col-sm-6 col-xs-12">
+              <SearchResults key={p.pitcherId} player={p} />
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 }
