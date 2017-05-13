@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function MetricsTable(props) {
-  const { pitchMetrics } = props;
+const MetricsTable = ({ pitchMetrics }) => {
   return (
     <table className="table table-condensed table-stripe table-bordered">
       <thead>
@@ -27,7 +26,7 @@ function MetricsTable(props) {
       </tbody>
     </table>
   );
-}
+};
 
 MetricsTable.propTypes = {
   pitchMetrics: PropTypes.array.isRequired,

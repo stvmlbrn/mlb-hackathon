@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function PanelNoControls(props) {
-  const { title, children } = props;
+const PanelNoControls = ({ title, children }) => {
   return (
     <div className="panel">
       {title && (
@@ -15,11 +14,11 @@ function PanelNoControls(props) {
       </div>
     </div>
   );
-}
+};
 
 PanelNoControls.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 PanelNoControls.defaultProps = {

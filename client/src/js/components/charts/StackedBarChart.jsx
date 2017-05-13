@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
 import _ from 'lodash';
 
 import general from '../../utils/general';
 
-
-function StackedBarChart(props) {
-  const { data } = props;
+const StackedBarChart = ({ data }) => {
   const dataPoints = [];
   const colors = general.chartColors();
 
@@ -32,7 +29,7 @@ function StackedBarChart(props) {
       </BarChart>
     </ResponsiveContainer>
   );
-}
+};
 
 StackedBarChart.propTypes = {
   data: PropTypes.array.isRequired,

@@ -6,13 +6,9 @@ import general from '../../utils/general';
 
 const colors = general.chartColors();
 
-function Chart(props) {
-  const { data } = props;
-
+const Chart = ({ data }) => {
   // add a 'fill' object for each pitch type so it appears in the chart as a different color
-  data.map((d) => {
-    d.fill = colors[d.name];
-  });
+  data.map(d => d.fill = colors[d.name]);
 
   return (
     <ResponsiveContainer width="100%" height={400}>
@@ -23,7 +19,7 @@ function Chart(props) {
       </PieChart>
     </ResponsiveContainer>
   );
-}
+};
 
 Chart.propTypes = {
   data: PropTypes.array.isRequired,

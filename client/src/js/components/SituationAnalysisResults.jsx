@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import TrendArrow from './icons/TrendArrow';
 
-function SituationAnalysisResults(props) {
-  var {totalPitches, pitchTotals, analysis} = props;
+const SituationAnalysisResults = ({ totalPitches, pitchTotals, analysis }) => {
   if (totalPitches > 0) {
     return (
       <div>
@@ -66,11 +66,17 @@ function SituationAnalysisResults(props) {
         </ul>
       </div>
     );
-  } else {
-    return (
-      <div>No data could be found matching your selected situation filter</div>
-    );
   }
+
+  return (
+    <div>No data could be found matching your selected situation filter</div>
+  );
+};
+
+SituationAnalysisResults.propTypes = {
+  totalPitches: PropTypes.number.isRequired,
+  pitchTotals: PropTypes.array.isRequired,
+  analysis: PropTypes.array.isRequired,
 };
 
 export default SituationAnalysisResults;

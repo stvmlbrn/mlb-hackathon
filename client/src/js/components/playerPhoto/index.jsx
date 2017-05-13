@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function PlayerPhoto(props) {
-  const { playerId, height } = props;
-
+const PlayerPhoto = ({ playerId, height }) => {
   return (
     <img
       src={`http://mlb.mlb.com/mlb/images/players/head_shot/${playerId}.jpg`}
@@ -12,7 +10,7 @@ function PlayerPhoto(props) {
       alt="Player Head Shot"
     />
   );
-}
+};
 
 PlayerPhoto.propTypes = {
   playerId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,

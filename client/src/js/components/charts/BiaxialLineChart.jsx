@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-function BiaxialLineChart(props) {
-  const { data, velocityMin, velocityMax, spinRateMin, spinRateMax } = props;
+const BiaxialLineChart = ({ data, velocityMin, velocityMax, spinRateMin, spinRateMax }) => {
   const velocityDomain = [velocityMin, velocityMax];
   const spinRateDomain = [spinRateMin, spinRateMax];
 
@@ -21,7 +20,7 @@ function BiaxialLineChart(props) {
       </LineChart>
     </ResponsiveContainer>
   );
-}
+};
 
 BiaxialLineChart.propTypes = {
   data: PropTypes.array.isRequired,

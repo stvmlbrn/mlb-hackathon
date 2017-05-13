@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function SituationForm(props) {
-  const { onSubmit, onChange, onRunnerChange, criteria } = props;
-
+const SituationForm = ({ onSubmit, onChange, onRunnerChange, criteria }) => {
   return (
     <form className="form-horizontal" onSubmit={onSubmit}>
       <div className="form-group">
@@ -90,7 +88,7 @@ function SituationForm(props) {
       </div>
     </form>
   );
-}
+};
 
 SituationForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

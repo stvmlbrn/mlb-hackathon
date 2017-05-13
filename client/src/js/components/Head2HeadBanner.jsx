@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 
 import Box from './box';
 
-function Head2HeadBanner(props) {
-  const { pa, pppa, h, bb, k } = props;
-  let { avg } = props;
-
+const Head2HeadBanner = ({ pa, pppa, h, bb, k, avg }) => {
   if (isNaN(avg)) {
     avg = '--';
   }
@@ -37,7 +34,7 @@ function Head2HeadBanner(props) {
       </div>
     </div>
   );
-}
+};
 
 Head2HeadBanner.propTypes = {
   pa: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,

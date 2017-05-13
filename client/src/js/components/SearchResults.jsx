@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import PanelNoControls from './panels/PanelNoControls';
 import PlayerPhoto from './playerPhoto';
 
-function SearchResults(props) {
-  const { player } = props;
+const SearchResults = ({ player }) => {
   const statsLink = `/player/${player.pitcherId}`;
 
   return (
@@ -25,7 +24,7 @@ function SearchResults(props) {
       </div>
     </PanelNoControls>
   );
-}
+};
 
 SearchResults.propTypes = {
   player: PropTypes.object.isRequired,

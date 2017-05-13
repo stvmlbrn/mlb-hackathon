@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Box(props) {
-  const { number, title, icon } = props;
+const Box = ({ number, title, icon }) => {
   return (
     <div className="metric">
       {icon &&
@@ -14,7 +13,7 @@ function Box(props) {
       </p>
     </div>
   );
-}
+};
 
 Box.propTypes = {
   number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
